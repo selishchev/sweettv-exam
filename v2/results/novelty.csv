@@ -1,0 +1,17 @@
+window,method,setting,repeat_share,new_share,precision_repeat_slots,precision_new_slots
+V1 26-30,popularity,popularity [hist=last10],0.7644,0.1078,0.5374,0.1001
+V1 26-30,repeat_count,repeat_count [hist=all_hl8],0.9841,0.0146,0.5052,0.1304
+V1 26-30,association_rules,association_rules(min_support=2) [hist=last10],0.801,0.0846,0.5448,0.1032
+V1 26-30,ppr,ppr(alpha=0.8) [hist=all_hl8],0.9792,0.0171,0.5228,0.1204
+V1 26-30,als,als(factors=16) [hist=last10],0.8697,0.0608,0.4995,0.0757
+V1 26-30,cbf_metadata,cbf_metadata [hist=all_hl8],0.6276,0.2265,0.5395,0.0294
+V1 26-30,cbf_schedule,cbf_schedule [hist=all_hl8],0.8586,0.0737,0.57,0.125
+V1 26-30,hybrid,"hybrid(alpha=0.8, w_ppr=0.7) [hist=all_hl8]",0.9706,0.0156,0.5433,0.1122
+test 31-42,popularity,popularity [hist=last10],0.7784,0.071,,
+test 31-42,repeat_count,repeat_count [hist=all_hl8],0.9935,0.0059,,
+test 31-42,association_rules,association_rules(min_support=2) [hist=last10],0.8389,0.0605,,
+test 31-42,ppr,ppr(alpha=0.8) [hist=all_hl8],0.9922,0.0063,,
+test 31-42,als,als(factors=16) [hist=last10],0.8778,0.0563,,
+test 31-42,cbf_metadata,cbf_metadata [hist=all_hl8],0.649,0.2097,,
+test 31-42,cbf_schedule,cbf_schedule [hist=all_hl8],0.9017,0.0487,,
+test 31-42,hybrid,"hybrid(alpha=0.8, w_ppr=0.7) [hist=all_hl8]",0.9873,0.0063,,
