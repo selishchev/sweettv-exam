@@ -1,0 +1,49 @@
+environment {"python": "3.14.0", "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O", "machine": "arm64", "cpu_count": 10, "numpy": "2.5.4", "pandas": "3.1.0", "scipy": "1.18.1"}
+metric self-check (course slide example): X = 0.9167 (slide 0.917), Y = 0.5333 (slide 0.533)
+data {"schedule_rows_raw": 3444007, "schedule_rows_dedup": 3444006, "view_schedule_pairs": 7752424, "view_seconds": 8619215224, "share_view_seconds_on_any_schedule_row": 0.9406559963167246, "share_view_seconds_on_labelled_rows": 0.5308201605478322, "log_rows": 5821987, "log_users": 4914, "log_channels": 202, "log_first": "2020-03-09 00:00:02", "log_last": "2020-07-26 23:59:58", "labelled_schedule_rows": 381892, "labelled_share_by_file": {"export_arh_11-20-final.csv": 0.10762366486259047, "export_arh_21-30-final.csv": 0.11309165911202036, "export_arh_31-42-final.csv": 0.11176197218109309}, "user_airing_pairs_any_overlap": 3014129, "prep_seconds": 13.5}
+clock-offset check (share of view starts within 60 s of a programme start): {-2: 0.033, -1: 0.0337, 0: 0.0373, 1: 0.0352, 2: 0.0361}
+thresholds {"overlap>=60s": {"user_airings": 2938125, "user_programme_pairs": 1350444}, "overlap>=300s": {"user_airings": 2079149, "user_programme_pairs": 949556}, "single sitting>=30%": {"user_airings": 1193902, "user_programme_pairs": 476818}, "single sitting>=50% (history)": {"user_airings": 870373, "user_programme_pairs": 336662}, "single sitting>=80% (label)": {"user_airings": 562939, "user_programme_pairs": 207955}}
+V0 (hist 11-20 -> val 21-25): pool 4279 programmes, users with history 1245/1260, users with >=1 relevant 938, setup 0.2s
+  [V0] popularity                   MAP@5 = 0.3695   (0.0s)
+  [V0] repeat_count (reference)     MAP@5 = 0.4925   (0.0s)
+  [V0] association_rules(min_support=2) MAP@5 = 0.4137   (0.3s)
+  [V0] association_rules(min_support=5) MAP@5 = 0.4139   (0.3s)
+  [V0] association_rules(min_support=20) MAP@5 = 0.4135   (0.2s)
+  [V0] ppr(alpha=0.5)               MAP@5 = 0.4955   (20.3s)
+  [V0] ppr(alpha=0.8)               MAP@5 = 0.5020   (20.2s)
+  [V0] ppr(alpha=0.9)               MAP@5 = 0.4907   (20.0s)
+  [V0] als(factors=16)              MAP@5 = 0.3606   (1.6s)
+  [V0] als(factors=64)              MAP@5 = 0.2841   (4.0s)
+  [V0] cbf_metadata                 MAP@5 = 0.2950   (0.6s)
+  [V0] cbf_schedule                 MAP@5 = 0.4961   (0.7s)
+  [V0] hybrid RRF(ppr, cbf_schedule; w_ppr=0.3) MAP@5 = 0.5120  (uses ppr(alpha=0.8))
+  [V0] hybrid RRF(ppr, cbf_schedule; w_ppr=0.5) MAP@5 = 0.5176  (uses ppr(alpha=0.8))
+  [V0] hybrid RRF(ppr, cbf_schedule; w_ppr=0.7) MAP@5 = 0.5217  (uses ppr(alpha=0.8))
+V1 (hist 16-25 -> val 26-30): pool 4566 programmes, users with history 1231/1260, users with >=1 relevant 1222, setup 0.2s
+  [V1] popularity                   MAP@5 = 0.4014   (0.0s)
+  [V1] repeat_count (reference)     MAP@5 = 0.4548   (0.1s)
+  [V1] association_rules(min_support=2) MAP@5 = 0.4209   (0.5s)
+  [V1] association_rules(min_support=5) MAP@5 = 0.4205   (0.3s)
+  [V1] association_rules(min_support=20) MAP@5 = 0.4204   (0.3s)
+  [V1] ppr(alpha=0.5)               MAP@5 = 0.4643   (32.0s)
+  [V1] ppr(alpha=0.8)               MAP@5 = 0.4746   (30.2s)
+  [V1] ppr(alpha=0.9)               MAP@5 = 0.4712   (30.5s)
+  [V1] als(factors=16)              MAP@5 = 0.3937   (1.8s)
+  [V1] als(factors=64)              MAP@5 = 0.3365   (4.2s)
+  [V1] cbf_metadata                 MAP@5 = 0.2865   (0.7s)
+  [V1] cbf_schedule                 MAP@5 = 0.4580   (0.8s)
+  [V1] hybrid RRF(ppr, cbf_schedule; w_ppr=0.3) MAP@5 = 0.4811  (uses ppr(alpha=0.8))
+  [V1] hybrid RRF(ppr, cbf_schedule; w_ppr=0.5) MAP@5 = 0.4913  (uses ppr(alpha=0.8))
+  [V1] hybrid RRF(ppr, cbf_schedule; w_ppr=0.7) MAP@5 = 0.4934  (uses ppr(alpha=0.8))
+selected on V1: {"association_rules": "association_rules(min_support=2)", "ppr": "ppr(alpha=0.8)", "als": "als(factors=16)", "hybrid": "hybrid RRF(ppr, cbf_schedule; w_ppr=0.7)"}
+FINAL (hist 21-30 -> test 31-42): pool 6642, users with history 1244/1260 (the other 16 get the popularity list), setup 0.2s
+final lists for all methods in 35.5s
+  wrote ./submissions/submission_popularity.csv: rows 1260, format and pool check OK
+  wrote ./submissions/submission_repeat_count.csv: rows 1260, format and pool check OK
+  wrote ./submissions/submission_association_rules.csv: rows 1260, format and pool check OK
+  wrote ./submissions/submission_ppr.csv: rows 1260, format and pool check OK
+  wrote ./submissions/submission_als.csv: rows 1260, format and pool check OK
+  wrote ./submissions/submission_cbf_metadata.csv: rows 1260, format and pool check OK
+  wrote ./submissions/submission_cbf_schedule.csv: rows 1260, format and pool check OK
+  wrote ./submissions/submission_hybrid.csv: rows 1260, format and pool check OK
+done in 232.5 s; results in ./results, submissions in ./submissions
