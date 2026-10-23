@@ -1,0 +1,361 @@
+{
+ "schedule_rows_raw": 3444007,
+ "schedule_rows_dedup": 3444006,
+ "view_schedule_pairs": 7752424,
+ "view_seconds": 8619215224,
+ "share_view_seconds_on_any_schedule_row": 0.9406559963167246,
+ "share_view_seconds_on_labelled_rows": 0.5308201605478322,
+ "log_rows": 5821987,
+ "log_users": 4914,
+ "log_channels": 202,
+ "log_first": "2020-03-09 00:00:02",
+ "log_last": "2020-07-26 23:59:58",
+ "labelled_schedule_rows": 381892,
+ "labelled_share_by_file": {
+  "export_arh_11-20-final.csv": 0.10762366486259047,
+  "export_arh_21-30-final.csv": 0.11309165911202036,
+  "export_arh_31-42-final.csv": 0.11176197218109309
+ },
+ "user_airing_pairs_any_overlap": 3014129,
+ "prep_seconds": 13.0,
+ "test_users": 1260,
+ "test_users_in_log": 1260,
+ "time_offset_check_share_within_60s": {
+  "-2": 0.033,
+  "-1": 0.0337,
+  "0": 0.0373,
+  "1": 0.0352,
+  "2": 0.0361
+ },
+ "threshold_table": {
+  "overlap>=60s": {
+   "user_airings": 2938125,
+   "user_programme_pairs": 1350444
+  },
+  "overlap>=300s": {
+   "user_airings": 2079149,
+   "user_programme_pairs": 949556
+  },
+  "single sitting>=30%": {
+   "user_airings": 1193902,
+   "user_programme_pairs": 476818
+  },
+  "single sitting>=50% (history)": {
+   "user_airings": 870373,
+   "user_programme_pairs": 336662
+  },
+  "single sitting>=80% (label)": {
+   "user_airings": 562939,
+   "user_programme_pairs": 207955
+  }
+ },
+ "view_duration_quantiles_s": {
+  "0.1": 80.0,
+  "0.25": 133.0,
+  "0.5": 396.0,
+  "0.75": 1452.0,
+  "0.9": 3911.0,
+  "0.99": 14079.139999999665
+ },
+ "airing_fmax_quantiles": {
+  "0.1": 0.015,
+  "0.25": 0.041,
+  "0.5": 0.177,
+  "0.75": 0.597,
+  "0.9": 1.0
+ },
+ "submission_checks": {
+  "popularity": true,
+  "repeat_count": true,
+  "association_rules": true,
+  "ppr": true,
+  "als": true,
+  "cbf_metadata": true,
+  "cbf_schedule": true,
+  "hybrid": true
+ },
+ "example_heavy": {
+  "user_id": "10500740270951698446",
+  "history_airings_ge50_weeks16_25": 1000,
+  "distinct_programmes_history_weeks16_25": 183,
+  "relevant_in_26_30": 60,
+  "top_history_weeks16_25": [
+   [
+    12001682,
+    "М/с 'Губка Боб Квадратные Штаны', 89 с. 'Красти Губка'.",
+    "Детям",
+    317
+   ],
+   [
+    12002856,
+    "М/с 'Элвиннн!!! и бурундуки', 1 сезон, 6 с. 'Звезда рэпа'.",
+    "Детям",
+    72
+   ],
+   [
+    12001697,
+    "М/с 'Аватар: Легенда об Аанге', 34 с. 'Город стен и секретов'.",
+    "Детям",
+    56
+   ],
+   [
+    2400480,
+    "ТСН. Спецпроект.",
+    "Инфо",
+    56
+   ],
+   [
+    12001734,
+    "М/с 'Волшебные покровители', 72 с. 'О, брат! / В чем разница?'.",
+    "Детям",
+    45
+   ],
+   [
+    12002355,
+    "М/с 'Кунг-фу Панда: Захватывающие легенды', 2 сезон, 5 с. 'Возвращение Шифу'.",
+    "Детям",
+    41
+   ],
+   [
+    240081,
+    "Факты. День.",
+    "Инфо",
+    36
+   ],
+   [
+    2400508,
+    "Сегодня. Итоги с Олегом Панютой.",
+    "Инфо",
+    29
+   ],
+   [
+    20088,
+    "'Завтрак с 1+1'. Информационно-развлекательная программа.",
+    "Развлечения",
+    26
+   ],
+   [
+    12002771,
+    "М/с 'Черепашки-ниндзя', 3 сезон, 18 с. 'Смертельный яд'.",
+    "Детям",
+    25
+   ]
+  ]
+ },
+ "example_light": {
+  "user_id": "8766761403437974146",
+  "history_airings_ge50_weeks16_25": 3,
+  "distinct_programmes_history_weeks16_25": 1,
+  "relevant_in_26_30": 12,
+  "top_history_weeks16_25": [
+   [
+    10002255,
+    "Т/с 'Спартак: Боги арены', 6 с. 'Горький финал'.",
+    "Сериалы",
+    3
+   ]
+  ]
+ },
+ "selected": {
+  "popularity": "popularity [hist=last10]",
+  "repeat_count": "repeat_count [hist=all_hl8]",
+  "association_rules": "association_rules(min_support=2) [hist=last10]",
+  "ppr": "ppr(alpha=0.8) [hist=all_hl8]",
+  "als": "als(factors=16) [hist=last10]",
+  "cbf_metadata": "cbf_metadata [hist=all_hl8]",
+  "cbf_schedule": "cbf_schedule [hist=all_hl8]",
+  "hybrid": "hybrid(alpha=0.8, w_ppr=0.7) [hist=all_hl8]"
+ },
+ "timings_s": {
+  "popularity [hist=last10]": {
+   "V0": 0.0,
+   "V1": 0.0
+  },
+  "repeat_count [hist=last10]": {
+   "V0": 0.0,
+   "V1": 0.0
+  },
+  "association_rules(min_support=2) [hist=last10]": {
+   "V0": 0.3,
+   "V1": 0.4
+  },
+  "association_rules(min_support=5) [hist=last10]": {
+   "V0": 0.3,
+   "V1": 0.3
+  },
+  "association_rules(min_support=20) [hist=last10]": {
+   "V0": 0.3,
+   "V1": 0.3
+  },
+  "ppr(alpha=0.5) [hist=last10]": {
+   "V0": 20.4,
+   "V1": 30.4
+  },
+  "ppr(alpha=0.8) [hist=last10]": {
+   "V0": 20.1,
+   "V1": 31.4
+  },
+  "ppr(alpha=0.9) [hist=last10]": {
+   "V0": 20.2,
+   "V1": 32.0
+  },
+  "als(factors=16) [hist=last10]": {
+   "V0": 1.6,
+   "V1": 1.8
+  },
+  "als(factors=64) [hist=last10]": {
+   "V0": 4.0,
+   "V1": 4.2
+  },
+  "cbf_metadata [hist=last10]": {
+   "V0": 0.5,
+   "V1": 0.6
+  },
+  "cbf_schedule [hist=last10]": {
+   "V0": 0.7,
+   "V1": 0.6
+  },
+  "hybrid(alpha=0.8, w_ppr=0.5) [hist=last10]": {
+   "V0": 0.1,
+   "V1": 0.1
+  },
+  "hybrid(alpha=0.8, w_ppr=0.7) [hist=last10]": {
+   "V0": 0.1,
+   "V1": 0.1
+  },
+  "hybrid(alpha=0.8, w_ppr=0.85) [hist=last10]": {
+   "V0": 0.1,
+   "V1": 0.1
+  },
+  "popularity [hist=all]": {
+   "V0": 0.0,
+   "V1": 0.0
+  },
+  "repeat_count [hist=all]": {
+   "V0": 0.0,
+   "V1": 0.1
+  },
+  "association_rules(min_support=2) [hist=all]": {
+   "V0": 0.3,
+   "V1": 0.6
+  },
+  "association_rules(min_support=5) [hist=all]": {
+   "V0": 0.3,
+   "V1": 0.4
+  },
+  "association_rules(min_support=20) [hist=all]": {
+   "V0": 0.2,
+   "V1": 0.4
+  },
+  "ppr(alpha=0.5) [hist=all]": {
+   "V0": 21.4,
+   "V1": 41.8
+  },
+  "ppr(alpha=0.8) [hist=all]": {
+   "V0": 21.6,
+   "V1": 42.8
+  },
+  "ppr(alpha=0.9) [hist=all]": {
+   "V0": 21.0,
+   "V1": 41.4
+  },
+  "als(factors=16) [hist=all]": {
+   "V0": 1.6,
+   "V1": 1.9
+  },
+  "als(factors=64) [hist=all]": {
+   "V0": 4.1,
+   "V1": 4.7
+  },
+  "cbf_metadata [hist=all]": {
+   "V0": 0.6,
+   "V1": 0.7
+  },
+  "cbf_schedule [hist=all]": {
+   "V0": 0.7,
+   "V1": 0.8
+  },
+  "hybrid(alpha=0.8, w_ppr=0.5) [hist=all]": {
+   "V0": 0.1,
+   "V1": 0.2
+  },
+  "hybrid(alpha=0.8, w_ppr=0.7) [hist=all]": {
+   "V0": 0.1,
+   "V1": 0.2
+  },
+  "hybrid(alpha=0.8, w_ppr=0.85) [hist=all]": {
+   "V0": 0.1,
+   "V1": 0.2
+  },
+  "popularity [hist=all_hl8]": {
+   "V0": 0.0,
+   "V1": 0.0
+  },
+  "repeat_count [hist=all_hl8]": {
+   "V0": 0.0,
+   "V1": 0.1
+  },
+  "association_rules(min_support=2) [hist=all_hl8]": {
+   "V0": 0.4,
+   "V1": 0.7
+  },
+  "association_rules(min_support=5) [hist=all_hl8]": {
+   "V0": 0.3,
+   "V1": 0.5
+  },
+  "association_rules(min_support=20) [hist=all_hl8]": {
+   "V0": 0.3,
+   "V1": 0.5
+  },
+  "ppr(alpha=0.5) [hist=all_hl8]": {
+   "V0": 21.3,
+   "V1": 41.1
+  },
+  "ppr(alpha=0.8) [hist=all_hl8]": {
+   "V0": 20.2,
+   "V1": 41.1
+  },
+  "ppr(alpha=0.9) [hist=all_hl8]": {
+   "V0": 20.6,
+   "V1": 41.1
+  },
+  "als(factors=16) [hist=all_hl8]": {
+   "V0": 1.6,
+   "V1": 2.0
+  },
+  "als(factors=64) [hist=all_hl8]": {
+   "V0": 4.0,
+   "V1": 4.8
+  },
+  "cbf_metadata [hist=all_hl8]": {
+   "V0": 0.6,
+   "V1": 0.7
+  },
+  "cbf_schedule [hist=all_hl8]": {
+   "V0": 0.7,
+   "V1": 0.9
+  },
+  "hybrid(alpha=0.8, w_ppr=0.5) [hist=all_hl8]": {
+   "V0": 0.1,
+   "V1": 0.3
+  },
+  "hybrid(alpha=0.8, w_ppr=0.7) [hist=all_hl8]": {
+   "V0": 0.1,
+   "V1": 0.3
+  },
+  "hybrid(alpha=0.8, w_ppr=0.85) [hist=all_hl8]": {
+   "V0": 0.1,
+   "V1": 0.3
+  }
+ },
+ "total_runtime_s": 755.4,
+ "environment": {
+  "python": "3.14.0",
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "machine": "arm64",
+  "cpu_count": 10,
+  "numpy": "2.5.4",
+  "pandas": "3.1.0",
+  "scipy": "1.18.1"
+ }
+}

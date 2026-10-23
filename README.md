@@ -28,10 +28,14 @@ The rules below are the same for every method.
 
 **Short lists and cold start.** If a method returns fewer than 5 programmes, the list is filled from the popularity list. Users with no history in the window get the popularity list.
 
-**Validation splits.** All methods use the last 10 training weeks as history.
-- V0: history 11-20, validation 21-25.
-- V1: history 16-25, validation 26-30. All hyperparameters are selected on V1.
-- Final: history 21-30, test 31-42.
+**Validation splits.**
+- V0: validation weeks 21-25.
+- V1: validation weeks 26-30. All settings are selected on V1.
+- Final: test weeks 31-42.
+
+**History windows.** Two versions of the pipeline exist, and both are kept in the repository:
+- v1 (`results/`, `submissions/`): the history is always the last 10 weeks before the target window, so V0 uses weeks 11-20, V1 uses weeks 16-25 and the final run uses weeks 21-30.
+- v2 (`v2/results/`, `v2/submissions/`): three history settings are compared on both splits, and each method uses the one that is best on V1. The settings are the last 10 weeks; all weeks from week 11; and all weeks from week 11 with a recency half-life of 8 weeks.
 
 ## Reproduce
 
@@ -48,15 +52,17 @@ The rules below are the same for every method.
    ```
    python3 -m venv .venv && source .venv/bin/activate
    pip install -r requirements.txt
-   python src/run_all.py --data data --out .
+   python src/run_all.py --data data --out v2
    ```
-   A full run takes about 8 minutes on 2 CPU cores, with a peak of about 4 GB RAM.
+   On an Apple-silicon laptop the v2 run takes about 10 minutes.
 
-## Outputs
+   The v1 outputs in `results/` and `submissions/` come from the first version of `src/` (see the git history), which was run with `--out .`.
+
+## Outputs (per version folder)
 
 - `results/run_log.txt`: the full log, including every validation MAP@5 and runtime.
 - `results/validation_map5.csv`: MAP@5 of every method and grid setting on V0 and V1.
 - `results/summary.json`: data statistics, threshold table, selected settings, timings, environment and the two example users.
 - `results/examples_two_users.csv`: Top-5 of every method for the two example users, with id, title and category. It covers the V1 validation window, compared with what the user watched, and the test window.
 - `submissions/submission_<method>.csv`: one Kaggle file per method.
-- `submissions/FINAL_submission.csv`: a byte-identical copy of the file behind the designated final Kaggle score.
+- `submissions/FINAL_submission.csv` (repository root only): a byte-identical copy of the submission with the best Kaggle private score.

@@ -9,7 +9,7 @@ HOUR_SLOTS = 168  # hour-of-week
 class Split:
     """One temporal split: history weeks (the last 10 training weeks) -> target weeks."""
 
-    def __init__(self, A, log, sched, hist_weeks, target_weeks, users, hist_th=0.5, label_th=0.8):
+    def __init__(self, A, log, sched, hist_weeks, target_weeks, users, hist_th=0.5, label_th=0.8, half_life=None):
         self.hw, self.tw = list(hist_weeks), list(target_weeks)
         self.last = max(self.hw)
         self.Aall = A[A.wk.isin(self.hw)]                       # every labelled overlap in the history window
@@ -25,7 +25,8 @@ class Split:
         self.users = [u for u in users]
         self.eu = [u for u in users if u in self.ui]              # evaluated users with usable history
         self.erows = np.array([self.ui[u] for u in self.eu], dtype=int)
-        cnt = self.H.groupby(['user_id', 'show']).size()
+        self.half_life = half_life
+        cnt = self.H.assign(w=self.decay(self.H.wk.values)).groupby(['user_id', 'show']).w.sum()
         r = np.array([self.ui[u] for u in cnt.index.get_level_values(0)])
         c = np.array([self.ii[s] for s in cnt.index.get_level_values(1)])
         self.X = sp.csr_matrix((cnt.values.astype(np.float64), (r, c)), shape=(len(self.all_users), len(self.items)))
@@ -42,6 +43,12 @@ class Split:
             self.labels = T
 
     # ---- helpers
+    def decay(self, wk):
+        """Recency weight of a history week: 1 for the last week, halved every `half_life` weeks (None = no decay)."""
+        if self.half_life is None:
+            return np.ones(len(wk))
+        return 0.5 ** ((self.last - np.asarray(wk)) / self.half_life)
+
     def lists_from_dense(self, S, k=100):
         """Top-k pool items per evaluated user from a dense (len(eu) x len(items)) score matrix."""
         out = {}
@@ -179,7 +186,7 @@ def view_hours(log, weeks, users):
     rep = np.repeat(np.arange(len(v)), n)
     hh = h0[rep] + (np.arange(n.sum()) - np.repeat(np.cumsum(n) - n, n))
     sec = np.minimum(e[rep], (hh + 1) * 3600) - np.maximum(s[rep], hh * 3600)
-    df = pd.DataFrame({'user_id': v.user_id.values[rep], 'ch': v.vsetv_id.values[rep],
+    df = pd.DataFrame({'user_id': v.user_id.values[rep], 'ch': v.vsetv_id.values[rep], 'wk': v.wk.values[rep],
                        'slot': ((hh // 24 + 3) % 7) * 24 + hh % 24, 'sec': sec})
     return df[df.sec > 0]
 
@@ -193,7 +200,7 @@ def cbf_schedule(sp_):
     V = view_hours(sp_.log, sp_.hw, sp_.eu)
     chans = sorted(set(V.ch) | set(sp_.ts.channel_id)); cix = {c: i for i, c in enumerate(chans)}
     uix = {u: i for i, u in enumerate(sp_.eu)}
-    prof = sp.csr_matrix((V.sec.values / 3600.0 / len(sp_.hw), (V.user_id.map(uix).values, V.ch.map(cix).values * HOUR_SLOTS + V.slot.values)),
+    prof = sp.csr_matrix((V.sec.values * sp_.decay(V.wk.values) / 3600.0 / len(sp_.hw), (V.user_id.map(uix).values, V.ch.map(cix).values * HOUR_SLOTS + V.slot.values)),
                          shape=(len(sp_.eu), len(chans) * HOUR_SLOTS))
     ts = sp_.ts
     key = ts.channel_id.map(cix).values * HOUR_SLOTS + hour_of_week(ts.start.values)
